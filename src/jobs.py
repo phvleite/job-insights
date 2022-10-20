@@ -21,11 +21,11 @@ def read(path):
     with open(path, encoding='utf-8') as file:
         read_file = csv.reader(file, delimiter=',')
         header, *data = read_file
-        result_list = []
-        for row in data:
-            dict_result = {}
-            for ind, elem in enumerate(row):
-                dict_result[header[ind]] = elem
-            result_list.append(dict_result)
+    result_list = []
+    for row in data:
+        dict_result = {}
+        for ind, elem in enumerate(row):
+            dict_result[header[ind]] = elem
+        result_list.append(dict_result)
 
     return result_list
