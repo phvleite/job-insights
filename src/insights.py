@@ -1,4 +1,5 @@
 from src.jobs import read
+# from jobs import read
 
 
 def get_unique_job_types(path):
@@ -106,7 +107,16 @@ def get_max_salary(path):
     int
         The maximum salary paid out of all job opportunities
     """
-    pass
+    result = read(path)
+    unique_max_salary = set()
+
+    for reg in result:
+        if reg['max_salary'] != '' and reg['max_salary'] != 'invalid':
+            unique_max_salary.add(int(reg['max_salary']))
+
+    maximo_max_salary = max(unique_max_salary)
+
+    return maximo_max_salary
 
 
 def get_min_salary(path):
