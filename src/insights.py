@@ -20,11 +20,12 @@ def get_unique_job_types(path):
     unique_jobs = set()
 
     for job_type in result:
-        unique_jobs.add(job_type['job_type'])
+        if job_type['job_type'] != '':
+            unique_jobs.add(job_type['job_type'])
 
-    unique_list = [job for job in unique_jobs]
+    unique_jobs_list = [job for job in unique_jobs]
 
-    return unique_list
+    return unique_jobs_list
 
 
 def filter_by_job_type(jobs, job_type):
@@ -60,7 +61,16 @@ def get_unique_industries(path):
     list
         List of unique industries
     """
-    return []
+    result = read(path)
+    unique_industries = set()
+
+    for industry in result:
+        if industry['industry'] != '':
+            unique_industries.add(industry['industry'])
+
+    unique_industries_list = [industry for industry in unique_industries]
+
+    return unique_industries_list
 
 
 def filter_by_industry(jobs, industry):
