@@ -15,6 +15,7 @@ from .more_insights import (
     slice_jobs,
     get_int_from_args,
     build_jobs_urls,
+    get_job,
 )
 
 bp = Blueprint("client", __name__, template_folder="templates")
@@ -41,7 +42,7 @@ def index():
 @bp.route("/jobs")
 def list_jobs():
     first_job = get_int_from_args("first_job", 0)
-    amount = get_int_from_args("amount", 20)
+    amount = get_int_from_args("amount", 50)
     salary = get_int_from_args("salary", None)
     industry = request.args.get("industry", None)
     job_type = request.args.get("job_type", None)
@@ -72,6 +73,14 @@ def list_jobs():
     }
 
     return render_template("list_jobs.jinja2", ctx=ctx)
+
+
+@bp.route("/job/<index>")
+def job(index):
+    jobs = read(path="src/jobs.csv")
+    job = get_job(jobs, index)
+
+    return render_template('job.jinja2', job=job)
 
 
 def init_app(app: Flask):
